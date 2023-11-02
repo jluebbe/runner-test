@@ -7,8 +7,7 @@ on:
 
 jobs:
   build:
-    #runs-on: ${{ github.repository == 'jluebbe/runner-test' && 'custom' || 'ubuntu-latest' }}
-    runs-on: ${{ vars.BUILD_RUNS_ON || 'ubuntu-latest' }}
+    runs-on: ${{ vars.BUILD_RUNS_ON || (github.repository == 'jluebbe/runner-test' && 'custom') || 'ubuntu-latest' }}
     steps:
     - uses: actions/checkout@v3
     - run: echo "Will run on ${{ vars.BUILD_RUNS_ON || 'ubuntu-latest' }}"
