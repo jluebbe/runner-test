@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ secrets.build_runs_on || 'ubuntu-latest' }}
+    runs-on: ${{ env.BUILD_RUNS_ON || 'ubuntu-latest' }}
     steps:
     - uses: actions/checkout@v3
-    - run: echo "Will run on ${{ secrets.build_runs_on || 'ubuntu-latest' }}"
+    - run: echo "Will run on ${{ env.BUILD_RUNS_ON || 'ubuntu-latest' }}"
