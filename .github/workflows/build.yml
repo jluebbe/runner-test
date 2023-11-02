@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ github.repository || 'ubuntu-latest' }}
+    runs-on: ${{ vars.BUILD_RUNS_ON || 'ubuntu-latest' }}
     steps:
     - uses: actions/checkout@v3
-    - run: echo "Will run on ${{ env.BUILD_RUNS_ON || 'ubuntu-latest' }}"
+    - run: echo "Will run on ${{ vars.BUILD_RUNS_ON || 'ubuntu-latest' }}"
