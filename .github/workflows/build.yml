@@ -2,7 +2,7 @@ name: build
 
 on:
   push: {}
-  pull-requst: {}
+  pull-request: {}
   workflow_dispatch: {}
 
 jobs:
