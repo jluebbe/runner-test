@@ -10,4 +10,14 @@ jobs:
     runs-on: ${{ vars.BUILD_RUNS_ON || (github.repository == 'jluebbe/runner-test' && 'custom') || 'ubuntu-latest' }}
     steps:
     - uses: actions/checkout@v3
-    - run: echo "Will run on ${{ vars.BUILD_RUNS_ON || 'ubuntu-latest' }}"
+    - name: Setup SSH Key for Yocto Cache
+      run: |
+        echo "${{ secrets.YOCTO_CACHE_KEY }}" >> ~/.ssh/id_ed25519
+        chmod 600 ~/.ssh/id_ed25519
+    - name: Create Data
+      run: |
+        touch foo
+    - name: Cache Data
+      if: ${{ !cancelled() }}
+      run: |
+        test ! -s ~/.ssh/id_ed25519 || rsync -avxP ./ yocto-cache@10.0.2.2:yocto-cache/
